@@ -14,7 +14,10 @@ pipeline {
             steps {
                 script {
 					println 'Se ejecuta revisión de Sonar'
-                    bat ""
+					def scannerHome = tool 'sonar-scanner';
+                    withSonarQubeEnv('sonarqube-server'){
+                    bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ejemplo-gradle -Dsonar.sources=src -Dsonar.java.binaries=build"
+
                 }
             }
         }
