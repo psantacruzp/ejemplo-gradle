@@ -28,6 +28,7 @@ pipeline {
                 script {
 					println 'Se realiza ejecución la aplicación'
 					bat "start /min gradle bootRun &"
+					sleep 10
                 }
             }
         }
