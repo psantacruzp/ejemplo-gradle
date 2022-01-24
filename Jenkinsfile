@@ -10,6 +10,7 @@ pipeline {
                 }
             }
         }
+		
         stage('Sonar') {
             steps {
                 script {
@@ -17,7 +18,7 @@ pipeline {
 					def scannerHome = tool 'sonar-scanner';
                     withSonarQubeEnv('sonarqube-server'){
                     bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ejemplo-gradle -Dsonar.sources=src -Dsonar.java.binaries=build"
-
+					}
                 }
             }
         }
@@ -25,7 +26,6 @@ pipeline {
             steps {
                 script {
 					println 'Se realiza ejecución la aplicación'
-                    bat "gradle bootRun"
                 }
             }
         }
