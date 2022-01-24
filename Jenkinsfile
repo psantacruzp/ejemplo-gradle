@@ -27,8 +27,8 @@ pipeline {
             steps {
                 script {
 					println 'Se realiza ejecución la aplicación'
-					bat "start /b gradle bootRun /wait"
-					timeout /nobreak 06
+					bat "start /b gradle bootRun"
+					sleep 15
                 }
             }
         }
@@ -42,10 +42,10 @@ pipeline {
         }
         stage('Nexus') {
             steps {
-                script {
-                    println 'Se realiza ejecución de gradle'
-                }
-            }
+				script {
+					nexusPublisher nexusInstanceId: 'nexus-server', nexusRepositoryId: 'test-gradle', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'C:/Users/psantacruz/Documents/diplomado-devops/ejemplo-gradle2/ejemplo-gradle/build/DevOpsUsach2020-0.0.1.jar']], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: '0.0.1']]]
+				}
+			}
         }
     }
 }
