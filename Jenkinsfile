@@ -27,8 +27,8 @@ pipeline {
             steps {
                 script {
 					println 'Se realiza ejecución la aplicación'
-					bat "start /B gradle bootRun"
-					sleep 10
+					bat "start /b gradle bootRun /wait"
+					timeout /nobreak 06
                 }
             }
         }
