@@ -27,6 +27,7 @@ pipeline {
             steps {
                 script {
 					println 'Se realiza ejecución la aplicación'
+					bat "nohup bash gradle bootRun &"
                 }
             }
         }
