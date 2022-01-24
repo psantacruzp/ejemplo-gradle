@@ -2,39 +2,42 @@ pipeline {
     agent any
 
     stages {
-        stage('Compileee') {
+        stage('Build Test & JAR') {
             steps {
                 script {
-                    bat "mvn clean compile -e"
+					println 'Se realiza ejecución de gradle'
+                    bat "gradle clean build"
                 }
             }
         }
-        stage('Test') {
+        stage('Sonar') {
             steps {
                 script {
-                    bat "mvn clean test -e"
-                }
-            }
-        }
-        stage('Package') {
-            steps {
-                script {
-                    bat "mvn clean package -e"
+					println 'Se ejecuta revisión de Sonar'
+                    bat ""
                 }
             }
         }
         stage('Run') {
             steps {
                 script {
-                    bat "start /min mvn spring-boot:run &"
+					println 'Se realiza ejecución la aplicación'
+                    bat "gradle bootRun"
                 }
             }
         }
-        stage('Test Applications') {
+        stage('TestApp') {
             steps {
                 script {
+					println 'Se prueba la ejecución'
                     bat "start chrome http://localhost:8081/rest/mscovid/test?msg=testing"
-					
+                }
+            }
+        }
+        stage('Nexus') {
+            steps {
+                script {
+                    println 'Se realiza ejecución de gradle'
                 }
             }
         }
