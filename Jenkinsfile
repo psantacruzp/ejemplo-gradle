@@ -23,7 +23,7 @@ pipeline {
 	}
 	post {
 		always {
-			slackSend channel: '#jenkins-ci', color: 'normal', message: '${username}' + ' ha ejecutado un Pipeline.', teamDomain: 'dipdevopsusac-tr94431', tokenCredentialId: 'slack-token'
+			slackSend channel: '#jenkins-ci', color: 'normal', message: "${username}" + ' ha ejecutado un Pipeline.', teamDomain: 'dipdevopsusac-tr94431', tokenCredentialId: 'slack-token'
 			slackSend channel: '#jenkins-ci', color: 'normal', message: 'Job Name: ' + env.JOB_NAME + ', BuildTool: ' +  params.buildTool + '.', teamDomain: 'dipdevopsusac-tr94431', tokenCredentialId: 'slack-token'
 		}
 		success{
