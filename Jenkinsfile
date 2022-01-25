@@ -1,6 +1,10 @@
 pipeline {
     agent any
 	
+	enviroment {
+		STAGE = ''
+	}
+	
 	parameters {
 		choice choices: ['gradle', 'maven'], description: 'Indicar la herramienta de construccion.', name: 'buildTool'
 	}
@@ -30,7 +34,7 @@ pipeline {
 			slackSend channel: '#jenkins-ci', color: '#29AE4A', message: 'Ejecucion exitosa.', teamDomain: 'dipdevopsusac-tr94431', tokenCredentialId: 'slack-token'
 		}
         failure {
-            slackSend channel: '#jenkins-ci', color: '#EC4D34', message: 'Ejecución Fallida.', teamDomain: 'dipdevopsusac-tr94431', tokenCredentialId: 'slack-token'
+            slackSend channel: '#jenkins-ci', color: '#EC4D34', message: 'Ejecucion Fallida en Stage: ' + "${STAGE}" + '.', teamDomain: 'dipdevopsusac-tr94431', tokenCredentialId: 'slack-token'
         }
     }
 }
