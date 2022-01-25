@@ -20,6 +20,16 @@ pipeline {
                 }
             }
         }
-		
+	}
+	post {
+		always {
+			slackSend channel: '#jenkins-ci', color: 'normal', message: "${username}, ${env.STAGE_NAME}, ${} - Se ha ejecutado un Pipeline", teamDomain: 'dipdevopsusac-tr94431', tokenCredentialId: 'slack-token'
+		}
+		success{
+			slackSend channel: '#jenkins-ci', color: '#29AE4A', message: 'Jesus Ruiz ' + env.JOB_NAME + ' ' + params.buildTool + ' Ejecucion exitosa', teamDomain: 'dipdevopsusac-tr94431', tokenCredentialId: 'slack-token'
+		}
+        failure {
+            slackSend channel: '#jenkins-ci', color: '#EC4D34', message: 'Ejecución Fallida ', teamDomain: 'dipdevopsusac-tr94431', tokenCredentialId: 'slack-token'
+        }
     }
 }
